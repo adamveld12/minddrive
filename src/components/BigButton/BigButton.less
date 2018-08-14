@@ -1,0 +1,15 @@
+@import '../../vars.less';
+.bigbutton {
+    border-radius: 50%;
+    background-color: @accent;
+    color: white;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px 1px lighten(@base-gray, 35%);
+
+    &:active {
+        outline: none;
+        background-color: darken(@accent, 10%);
+    }
+}

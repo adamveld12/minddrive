@@ -1,0 +1,43 @@
+@import '../../vars.less';
+
+.card {
+    width: 320px;
+    box-shadow: 1px 1px 5px 1px lighten(@base-gray, 35%);
+
+    .titlesection {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .headsection {
+        padding: 10px;
+        border-bottom: 1px solid lighten(@base-gray, 45%);
+
+        h2 {
+            flex-grow: 1;
+            color: black;
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+    }
+
+    .ctrlpanel {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+        margin-left: 5px;
+        justify-content: flex-start;
+
+        .icon {
+            cursor: pointer;
+            color: @base-gray;
+            padding: 3px 0;
+        }
+    }
+
+    .contentsection {
+        color: black;
+    }
+}
