@@ -3,15 +3,18 @@
 .card {
     width: 320px;
     box-shadow: 1px 1px 5px 1px lighten(@base-gray, 35%);
+    cursor: pointer;
 
     .titlesection {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        flex-grow: 1;
     }
 
     .headsection {
         padding: 10px;
         border-bottom: 1px solid lighten(@base-gray, 45%);
+        display: flex;
 
         h2 {
             flex-grow: 1;
@@ -39,5 +42,19 @@
 
     .contentsection {
         color: black;
+    }
+}
+
+.expanded {
+    width: 80% !important;
+
+    .headsection {
+        height: 150px !important;
+
+        h2 {
+            flex-grow: unset;
+            border-bottom: 1px solid lighten(@base-gray, 45%);
+            margin-right: 10px;
+        }
     }
 }

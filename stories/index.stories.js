@@ -12,6 +12,8 @@ import BackCrumb from '../src/components/BackCrumb/BackCrumb';
 import Tags from '../src/components/Tags/Tags';
 import Card from '../src/components/Card/Card';
 import BigButton from '../src/components/BigButton/BigButton';
+import Nav from '../src/components/Nav/Nav';
+import Combo from '../src/components/Combo/Combo';
 
 addDecorator(story => (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '25px' }}>
@@ -42,6 +44,9 @@ storiesOf('Small Components', module)
     })
     .add('Big Button', () => (
         <BigButton onClick={action('clicked')} />
+    ))
+    .add('Combo', () => (
+        <Combo options={[{ label: 'Markdown', value: 'text' }, { label: 'Photo', value: 'img' }]} />
     ));
 
 
@@ -66,20 +71,42 @@ storiesOf('Large Components', module)
     .add('Card', () => (
         <div style={cardStyle}>
             <Card
-                onDelete={action('deleting card')}
-                onEdit={action('editing card')}
-                onShare={action('sharing card')}
-                title="A really neat card"
-                pages={[pages[0]]}
-                tags={['neat', 'cool', 'not t-bag']}
+              onExpand={action('expanding')}
+              onDelete={action('deleting card')}
+              onEdit={action('editing card')}
+              onShare={action('sharing card')}
+              title="A really neat card"
+              pages={[pages[0]]}
+              tags={['neat', 'cool', 'not t-bag']}
             />
             <Card
-                onDelete={action('deleting card')}
-                onEdit={action('editing card')}
-                onShare={action('sharing card')}
-                title="A second really neat card"
-                pages={[pages[1]]}
-                tags={['neat', 'cool', 'not t-bag']}
+              onExpand={action('expanding')}
+              onDelete={action('deleting card')}
+              onEdit={action('editing card')}
+              onShare={action('sharing card')}
+              title="A second really neat card"
+              pages={[pages[1]]}
+              tags={['neat', 'cool', 'not t-bag']}
             />
         </div>
+    ))
+    .add('Card (expanded)', () => (
+        <Card
+          expand
+          onExpand={action('expanding')}
+          onDelete={action('deleting card')}
+          onEdit={action('editing card')}
+          onShare={action('sharing card')}
+          title="A really neat card"
+          pages={[pages[0]]}
+          tags={['neat', 'cool', 'not t-bag']}
+        />
+    ))
+    .add('Nav bar', () => (
+        <Nav submitSearch={action('search')} />
+    ))
+    .add('Nav bar (expanded)', () => (
+        <Nav expand submitSearch={action('search')} />
     ));
+// .add('Board Page', () => (
+// ));

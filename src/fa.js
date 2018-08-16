@@ -9,9 +9,13 @@ import {
     faShare,
     faEdit,
     faPlus,
+    faExpandArrowsAlt,
+    faCaretDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
+    faCaretDown,
+    faExpandArrowsAlt,
     faDollarSign,
     faSearch,
     faArrowLeft,

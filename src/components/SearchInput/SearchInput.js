@@ -14,6 +14,15 @@ class SearchInput extends PureComponent {
         this.state = { searchTerm: '' };
     }
 
+    submit = () => {
+        const { onSubmit } = this.props;
+        const { searchTerm } = this.state;
+
+        if (onSubmit) {
+            onSubmit(searchTerm);
+        }
+    }
+
     handleKey = ({ key }) => {
         const { onSubmit } = this.props;
         const { searchTerm } = this.state;
@@ -28,7 +37,7 @@ class SearchInput extends PureComponent {
     render() {
         return (
             <div className={search}>
-                <FontAwesomeIcon className={icon} icon={['fas', 'search']} />
+                <FontAwesomeIcon className={icon} icon={['fas', 'search']} onClick={this.submit} />
                 <input type="text" onChange={this.update} onKeyPress={this.handleKey} />
             </div>
         );

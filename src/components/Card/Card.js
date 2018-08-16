@@ -11,29 +11,38 @@ const {
     headsection,
     icon,
     titlesection,
-    page,
     ctrlpanel,
+    expanded,
 } = styles;
 class Card extends Component {
     static propTypes = {
+        expand: PropTypes.bool,
+        onExpand: PropTypes.func.isRequired,
         onDelete: PropTypes.func.isRequired,
         onEdit: PropTypes.func.isRequired,
         onShare: PropTypes.func.isRequired,
         title: PropTypes.string.isRequired,
-        pages: PropTypes.arrayOf({
+        pages: PropTypes.arrayOf(PropTypes.shape({
             content: PropTypes.string.isRequired,
             type: PropTypes.oneOf(['image', 'text']),
-        }).isRequired,
+        })).isRequired,
         tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     };
 
-    constructor() {
-        super();
-        this.state = { expanded: false };
+    static defaultProps = {
+        expand: false,
+    };
+
+    onExpand = () => {
+        const { onExpand } = this.props;
+        if (onExpand) {
+            onExpand();
+        }
     }
 
     render() {
         const {
+            expand,
             title,
             pages,
             tags,
@@ -41,18 +50,20 @@ class Card extends Component {
             onDelete,
             onShare,
         } = this.props;
+
         return (
-            <div className={card}>
+            <div className={`${card} ${expand && expanded}`}>
                 <header className={headsection}>
                     <div className={titlesection}>
                         <h2> {title} </h2>
-                        <div className={ctrlpanel}>
-                            <FontAwesomeIcon className={icon} icon="edit" onClick={() => onEdit()} />
-                            <FontAwesomeIcon className={icon} icon="share" onClick={() => onShare()} />
-                            <FontAwesomeIcon className={icon} icon="trash" onClick={() => onDelete()} />
-                        </div>
+                        <Tags editable={expand} tags={tags} />
                     </div>
-                    <Tags tags={tags} />
+                    <div className={ctrlpanel}>
+                        <FontAwesomeIcon className={icon} icon="expand-arrows-alt" onClick={() => this.onExpand()} />
+                        <FontAwesomeIcon className={icon} icon="edit" onClick={() => onEdit()} />
+                        <FontAwesomeIcon className={icon} icon="share" onClick={() => onShare()} />
+                        <FontAwesomeIcon className={icon} icon="trash" onClick={() => onDelete()} />
+                    </div>
                 </header>
                 <section className={contentsection}>
                     {pages.map(x => <Page key={x.content} {...x} />)}

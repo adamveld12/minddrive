@@ -1,16 +1,13 @@
 import Weedux, { middleware } from 'weedux';
+import board, { initialState as boardState } from './board';
 
 const { thunk } = middleware;
 
 const objectReducer = reducers => (s, a) => {
-    const newState = { ...s };
-    reducers.forEach((r) => {
-        const initialState = s[r[0]];
-        const reducedState = r[1](initialState, a);
-        if (reducedState) {
-            newState[r[0]] = reducedState;
-        }
-    });
+    const newState = Object.keys(reducers).reduce(
+        (state, k) => ({ ...state, [k]: reducers[k](state[k], a) }),
+        { ...s },
+    );
 
     console.groupCollapsed(`ACTION: ${a.type}`);
     console.log('Action:', a);
@@ -22,10 +19,12 @@ const objectReducer = reducers => (s, a) => {
 };
 
 const initialState = {
+    board: boardState,
 };
 
-const rootReducer = objectReducer([
-]);
+const rootReducer = objectReducer({
+    board,
+});
 const store = new Weedux(initialState, rootReducer, [thunk]);
 
 

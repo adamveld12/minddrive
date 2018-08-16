@@ -7,7 +7,7 @@ import styles from './BackCrumb.less';
 
 const { backcrumb, icon } = styles;
 const BackCrumb = ({ goBack, title }) => (
-    <a className={backcrumb} href onClick={() => goBack()}>
+    <a className={backcrumb} onClick={() => goBack()}>
         <FontAwesomeIcon className={icon} icon="arrow-left" />
         <span>{title}</span>
     </a>
