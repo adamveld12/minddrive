@@ -18,7 +18,7 @@ const boardsCss = css`
 `;
 
 const bigButtonCss = css`
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 35px;
 `;
@@ -42,15 +42,13 @@ const breakpointColumnsObj = {
 
 class BoardPage extends Component {
     static propTypes = {
-        board: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        notes: PropTypes.arrayOf(PropTypes.shape({
             title: PropTypes.string.isRequired,
-            notes: PropTypes.arrayOf(PropTypes.shape({
-                title: PropTypes.string.isRequired,
-                pages: PropTypes.array.isRequired,
-                tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-            })).isRequired,
+            pages: PropTypes.array.isRequired,
             tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-        }).isRequired,
+        })).isRequired,
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired,
         createNewNote: PropTypes.func.isRequired,
     }
 
@@ -60,9 +58,10 @@ class BoardPage extends Component {
     }
 
     createNewNote = () => {
-        const { createNewNote } = this.props;
+        const { title, createNewNote } = this.props;
 
         createNewNote({
+            boardTitle: title,
             title: 'hello',
             pages: [{
                 content: 'interesting content',
@@ -75,24 +74,24 @@ class BoardPage extends Component {
     onExpand = idx => () => { console.log('expanding'); }
 
     render() {
-        const { board: { title, notes } } = this.props;
+        const { title, notes } = this.props;
         return (
             <div>
                 <Nav submitSearch={() => {}} />
                 <div className={boardsCss}>
                     <BackCrumb title={title} goBack={() => {}} />
-                    <Masonry breakpointCols={breakpointColumnsObj} className={masonryCss} columnClassName="my-masonry-grid_column">
+                    <Masonry breakpointCols={breakpointColumnsObj} className={masonryCss} columnClassName="masonry-grid_column">
                         {
                             notes.map((n, idx) => (
                                 <div key={n.created} className={cardCss}>
                                     <Card
-                                        onExpand={this.onExpand(idx)}
-                                        onDelete={this.onExpand(idx)}
-                                        onEdit={this.onExpand(idx)}
-                                        onShare={this.onExpand(idx)}
-                                        title={n.title}
-                                        pages={n.pages}
-                                        tags={n.tags}
+                                      onExpand={this.onExpand(idx)}
+                                      onDelete={this.onExpand(idx)}
+                                      onEdit={this.onExpand(idx)}
+                                      onShare={this.onExpand(idx)}
+                                      title={n.title}
+                                      pages={n.pages}
+                                      tags={n.tags}
                                     />
                                 </div>
                             ))
@@ -111,7 +110,7 @@ const mapStateToProps = (state, props) => {
     const { match: { params } } = props;
     const boardName = params.board;
     const board = getBoard(state, boardName);
-    return { board };
+    return { ...board };
 };
 
 const mapDispatchToProps = d => ({

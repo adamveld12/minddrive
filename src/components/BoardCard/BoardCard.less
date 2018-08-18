@@ -1,0 +1,49 @@
+@import '../../vars.less';
+
+
+.container {
+    box-shadow: 1px 1px 5px 1px lighten(@base-gray, 35%);
+    cursor: pointer;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+
+    .icon {
+        color: @base-gray;
+    }
+
+    .imgContainer {
+        flex-grow: 1;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .titlesection {
+        display: flex;
+        width: 100%;
+    }
+
+     header {
+        display: flex;
+        flex-direction: column;
+        padding: 5px 10px;
+
+        h2 {
+            flex-grow: 1;
+            font-weight: 300;
+            margin: 0 0 10px 5px;
+        }
+
+        p {
+            margin: 5px 0 5px 5px;
+        }
+
+         p, h2 {
+             color: black;
+             flex-grow: 1;
+             padding: 0;
+         }
+    }
+}

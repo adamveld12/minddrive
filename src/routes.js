@@ -5,6 +5,7 @@ import BoardPage from './pages/BoardPage';
 
 const BoardPageRoute = props => <BoardPage {...props} />;
 // const DetailPage = props => <DetailPage {...props} />;
+// const BoardsPage = props => <BoardsPage {...props} />;
 
 
 const browserHistory = createHistory();
@@ -13,7 +14,7 @@ export default () => (
         <Fragment>
             <Route exact path="/" render={BoardPageRoute} />
             <Route path="/:board" render={BoardPageRoute} />
-            <Route path="/:board/:note-id" render={BoardPageRoute} />
+            <Route path="/:board/:noteId" render={BoardPageRoute} />
         </Fragment>
     </Router>
 );

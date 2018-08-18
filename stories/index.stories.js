@@ -14,6 +14,7 @@ import Card from '../src/components/Card/Card';
 import BigButton from '../src/components/BigButton/BigButton';
 import Nav from '../src/components/Nav/Nav';
 import Combo from '../src/components/Combo/Combo';
+import BoardCard from '../src/components/BoardCard/BoardCard';
 
 addDecorator(story => (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '25px' }}>
@@ -100,6 +101,15 @@ storiesOf('Large Components', module)
           title="A really neat card"
           pages={[pages[0]]}
           tags={['neat', 'cool', 'not t-bag']}
+        />
+    ))
+    .add('Board Card', () => (
+        <BoardCard
+            id={0}
+            title="Farts"
+            noteCount={24}
+            tags={['smelly', 'better out than in']}
+            onDelete={action('deleting board')}
         />
     ))
     .add('Nav bar', () => (

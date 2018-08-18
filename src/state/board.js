@@ -44,10 +44,10 @@ export default (state, { type, payload }) => {
             ...state,
             boards: {
                 ...state.boards,
-                [payload.board]: {
-                    ...state.boards[payload.board],
+                [payload.boardTitle]: {
+                    ...state.boards[payload.boardTitle],
                     notes: [
-                        ...state.boards[payload.board].notes,
+                        ...state.boards[payload.boardTitle].notes,
                         new Note(payload.title, payload.pages, payload.tags),
                     ],
                 },
@@ -62,11 +62,11 @@ const selector = state => state.board;
 export const getBoard = (state, board) => selector(state).boards[board];
 
 const newNote = ({
-    board, title, pages, tags,
+    boardTitle, title, pages, tags,
 }) => ({
     type: BOARD_NEW_NOTE,
     payload: {
-        board, title, pages, tags,
+        boardTitle, title, pages, tags,
     },
 });
 
